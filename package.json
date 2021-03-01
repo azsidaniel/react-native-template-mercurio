@@ -4,5 +4,6 @@
   "description": "React Native template",
   "main": "index.js",
   "author": "Daniel Silva",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {}
 }
