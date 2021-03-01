@@ -7,14 +7,28 @@
     "android-reconnect": "adb reverse tcp:8081 tcp:8081",
     "android-clean": "cd ./android && ./gradlew clean",
     "android-debug": "adb logcat *:E",
-    "android-dev": "cd ./android && cross-env ENVFILE=.env.dev ./gradlew assembleRelease",
-    "android-staging": "cd ./android && cross-env ENVFILE=.env.staging ./gradlew assembleRelease",
-    "android-production": "cd ./android && cross-env ENVFILE=.env.production ./gradlew assembleRelease",
+    "android-dev": "react-native run-android --variant=release",
+    "android-staging": "cross-env-shell ENVFILE=.env.staging react-native run-android --variant=release",
+    "android-release": "cross-env-shell ENVFILE=.env.production react-native run-android --variant=release",
     "ios": "react-native run-ios",
+    "ios-dev": "react-native run-ios --variant=release",
+    "ios-staging": "cross-env-shell ENVFILE=.env.staging react-native run-ios --variant=release",
+    "ios-release": "cross-env-shell ENVFILE=.env.production react-native run-ios --variant=release",
+    "ios-clean": "cd ios && xcodebuild clean",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint .",
-    "postversion": "react-native-version"
+    "lint": "pretty-quick --staged && lint-staged",
+    "postversion": "react-native-version",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --quiet --fix"
+    ],
+    "*.{json,md,html}": [
+      "prettier --write"
+    ],
+    "*.js": "eslint --cache --fix"
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.10",
@@ -50,9 +64,12 @@
     "eslint-plugin-react-hooks": "4",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "eslint-plugin-unused-imports": "^1.1.0",
+    "husky": "^5.1.2",
     "jest": "^25.1.0",
+    "lint-staged": "^10.5.4",
     "metro-react-native-babel-preset": "^0.59.0",
     "prettier": "^2.2.1",
+    "pretty-quick": "^3.1.0",
     "react-native-version": "^4.0.0",
     "react-test-renderer": "16.13.1",
     "typescript": "^4.2.2"
