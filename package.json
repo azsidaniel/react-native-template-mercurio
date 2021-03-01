@@ -1,0 +1,8 @@
+{
+  "name": "react-native-template-mercurio",
+  "version": "1.0.0",
+  "description": "React Native template",
+  "main": "index.js",
+  "author": "Daniel Silva",
+  "license": "MIT"
+}
